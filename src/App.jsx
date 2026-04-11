@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Test from "./pages/Test"
+import Dashboard from "./pages/Dashboard"
 
 function App() {
   return (
     <BrowserRouter>
-      <Route element={<MainLayout />}>
+      <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/catalog" element={<Catalog />} />
+        {/* <Route path="/catalog" element={<Catalog />} />
         <Route path="/course/:id" element={<CourseDetail />} />
-        <Route path="/profile" element={<Profile />} />
-      </Route>
+        <Route path="/profile" element={<Profile />} /> */}
+      </Routes>
     </BrowserRouter>
   )
 }
