@@ -1,11 +1,12 @@
 import React from 'react'
-
+import Button from '../components/Button'
 const Dashboard = () => {
     return (
-        <div>
-            <h1 className="type-underlined bg-purple-50 text-helper-error">
-                Hello Redberry!
-            </h1>
+        <div className="flex items-center justify-center h-screen">
+
+            <Button variant="ghost" disabled={true}>
+                Button
+            </Button>
         </div>
     )
 }
