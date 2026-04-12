@@ -52,7 +52,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${selectedVariant} ${widthClass} ${className}`.trim()}
+      className={`transition-colors duration-200 ${selectedVariant} ${widthClass} ${className}`.trim()}
     >
       {children}
     </button>
