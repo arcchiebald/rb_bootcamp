@@ -104,9 +104,15 @@ const DragDropUpload = () => {
                             <p className="type-micro-helper-regular-xs text-greyscale-300">
                                 Size - {niceBytes(fileInfo.size)}
                             </p>
-                            <p className="type-micro-helper-regular-xs underline underline-offset-3 text-purple-500">
+                            <label className="type-micro-helper-regular-xs underline underline-offset-3 text-purple-500 cursor-pointer hover:text-purple-700 transition-colors">
+                                <input
+                                    type="file"
+                                    className="hidden"
+                                    accept="image/jpeg, image/png, image/webp"
+                                    onChange={handleFileSelect}
+                                />
                                 Change
-                            </p>
+                            </label>
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,20 @@
-import React from 'react'
-import Button from '../components/Button'
 import Input from '../components/Input'
+import UploadField from '../components/UploadField'
+import Button from '../components/Button'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+
+
 const Dashboard = () => {
     return (
-        <div className="flex items-center justify-center h-screen">
-
-            <Input label="Password" placeholder=" Enter your password" type='password' error={1} helperText='asdads'/>
+        <div className="flex flex-col gap-6 items-center">
+            <Input label="Email" type="password" placeholder="Enter your email" error={1} helperText="Please enter a valid email address." />
+            <UploadField />
+            <UploadField />
+            <UploadField /> {/* FOR TESTING PURPOSES */}
+            <UploadField />
+            <UploadField />
+            <Button variant="outline" disabled={0}>Submit</Button>
         </div>
     )
 }
