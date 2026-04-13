@@ -7,7 +7,7 @@ const Navbar = ({ user }) => {
         w-full h-27
         flex
         px-44.25 py-6 
-        mb-10
+        mb-15
         bg-greyscale-100 border-b border-greyscale-200
         shadow-[0px_0px_11.7px_0px_#0000000A]
         `}>
