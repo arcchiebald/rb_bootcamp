@@ -1,7 +1,6 @@
 import Button from "../Button";
 import enrollmentImg from '../../assets/enrollment_img.png';
 
-// პლეისჰოლდერები ხატულებისთვის
 const PlaceholderImage = () => (
     <div className="w-full h-full bg-gray-200 rounded-[10px] flex items-center justify-center text-gray-400">
         [ Image ]
@@ -28,18 +27,15 @@ export const ProgressCard = ({
                         shadow-[0px_0px_11.7px_0px_#0000000A] bg-greyscale-50 
                         border-[0.5px] border-greyscale-100 rounded-xl 
                         hover:border-purple-200 hover:shadow-[0px_0px_25px_0px_8A82D440] 
-                        active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] 
+                        active:border active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] 
                         transition-all duration-200
                         ${blurred ? 'filter blur-sm' : ''}`}>
             <div className="flex flex-col items-start gap-4 w-full">
-                {/* მთავარი ინფორმაციული ბლოკი (მარცხნივ სურათი, მარჯვნივ ტექსტები) */}
                 <div className="flex flex-row items-start gap-4.5 w-full">
-                    {/* სურათის ბლოკი */}
                     <div className="w-35 h-30.75 rounded-xl overflow-hidden bg-gray-100 shrink-0">
                         {image ? <img src={image} alt={title} className="w-full h-full object-cover" /> : <PlaceholderImage />}
                     </div>
 
-                    {/* ინფო (მარჯვენა მხარე) */}
                     <div className="flex flex-col items-start gap-2 grow">
                         <div className="flex flex-row justify-between items-center w-full">
                             <div>
@@ -51,13 +47,11 @@ export const ProgressCard = ({
                                 </span>
                             </div>
                             <div className="flex flex-row items-center gap-1">
-                                {/* [ Placeholder: Star Icon ] */}
                                 <StarIcon />
                                 <span className="type-body-xs text-greyscale-600">{rating}</span>
                             </div>
                         </div>
 
-                        {/* სათაური */}
                         <h4 className="font-semibold text-xl leading-6 text-greyscale-900 w-64.25">
                             {title}
                         </h4>
@@ -65,7 +59,6 @@ export const ProgressCard = ({
                     </div>
                 </div>
 
-                {/* პროგრესის და ბუტონის სექცია */}
                 <div className="flex flex-row justify-between items-center gap-5 w-full h-12 mt-2">
                     {/* Progress Bar */}
                     <div className="flex flex-col justify-center items-start gap-2 grow h-10 w-111.5">
@@ -73,7 +66,6 @@ export const ProgressCard = ({
                             {`${progressPercent}% Complete`}
                         </span>
                         <div className="relative w-full h-3.75 bg-purple-100 rounded-[30px] overflow-hidden mt-1">
-                            {/* აქ width-ში პირდაპირ progressPercent იწერება */}
                             <div
                                 className="absolute left-0 top-0 bottom-0 bg-purple-500 rounded-[30px]"
                                 style={{ width: `${progressPercent}%` }}

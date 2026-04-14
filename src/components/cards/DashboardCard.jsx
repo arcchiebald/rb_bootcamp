@@ -22,7 +22,7 @@ export const DashboardCard = ({
     price = "$299",
 }) => {
     return (
-        <div className={`box-border flex flex-col items-start p-5 gap-6 w-126.5 min-h-144 shadow-[0px_0px_11.7px_0px_#0000000A] bg-greyscale-50 border-[0.5px] border-greyscale-100 rounded-xl hover:border-purple-200 hover:shadow-[0px_0px_25px_0px_#8A82D440] active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] transition-all duration-200`}>
+        <div className={`box-border flex flex-col items-start p-5 gap-6 w-126.5 min-h-144 bg-greyscale-50 border border-greyscale-100 rounded-xl hover:border-[0.5px] hover:border-purple-200 hover:shadow-[0px_0px_25px_0px_#8A82D440] active:border active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] transition-all duration-200`}>
             <div className="flex flex-col items-start gap-4 w-full">
                 <div className="w-full h-65.5 rounded-[10px] overflow-hidden bg-gray-100">
                     {image ? <img src={image} alt={title} className="w-full h-full object-cover" /> : <PlaceholderImage />}
