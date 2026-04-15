@@ -17,6 +17,7 @@ const Input = ({
     id,
     defaultValue = '',
     prefix = '',
+    maxLength = undefined,
 }) => {
     const generatedId = useId();
     const inputId = id || generatedId;
@@ -73,6 +74,7 @@ const Input = ({
                     onBlur={onBlur}
                     disabled={disabled}
                     readOnly={readOnly}
+                    maxLength={maxLength}
                     className={`
             w-full h-12
             ${prefix ? 'pl-13 pr-3.25' : 'px-3.25'} py-3

@@ -108,7 +108,8 @@ const ProfileModal = ({ isOpen, onClose, user, setUser }) => {
       onClose();
     }
   };
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
+    if (e) e.preventDefault();
     let newErrors = {};
     ['fullName', 'mobileNumber', 'age'].forEach(field => {
       const err = validateField(field, formData[field]);
@@ -138,8 +139,13 @@ const ProfileModal = ({ isOpen, onClose, user, setUser }) => {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       
-      setUser(response.data.data);
-      handleClose();
+      const updatedUser = response.data?.data || response.data;
+      if (updatedUser) {
+        setUser(updatedUser);
+      }
+      // Use onClose directly here to bypass the "incomplete" dialog prompt 
+      // since the user just successfully submitted their profile update.
+      onClose();
     } catch (err) {
       if (err.response?.data?.errors) {
         const apiErrors = err.response.data.errors;
@@ -159,7 +165,7 @@ const ProfileModal = ({ isOpen, onClose, user, setUser }) => {
 
   return (
     <Modal isOpen={isOpen} quit={true} onQuit={handleClose}>
-      <div className="flex flex-col items-center gap-6 w-full max-w-115">
+      <form onSubmit={handleUpdate} className="flex flex-col items-center gap-6 w-full max-w-115">
         <h2 className="type-heading-2 text-greyscale-900 text-center">Profile</h2>
 
         <div className="flex items-center gap-3 w-full">
@@ -220,6 +226,7 @@ const ProfileModal = ({ isOpen, onClose, user, setUser }) => {
                 onBlur={handleBlur}
                 prefix="+995 "
                 placeholder="" 
+                maxLength={9}
                 error={!!errors.mobileNumber}
                 success={!errors.mobileNumber && formData.mobileNumber?.replace(/\s/g, '').length === 9 && formData.mobileNumber?.replace(/\s/g, '').startsWith('5')}
                 helperText={errors.mobileNumber?.[0]}
@@ -254,10 +261,10 @@ const ProfileModal = ({ isOpen, onClose, user, setUser }) => {
           </div>
         </div>
 
-        <Button onClick={handleUpdate} variant="primary" className="w-full mt-2" disabled={loading || Object.keys(errors).length > 0}>
+        <Button type="submit" onClick={handleUpdate} variant="primary" className="w-full mt-2" disabled={loading || Object.keys(errors).length > 0}>
           {loading ? 'Saving...' : 'Update Profile'}
         </Button>
-      </div>
+      </form>
     </Modal>
   );
 };

@@ -11,7 +11,14 @@ const LoginModal = ({ isOpen, onClose, setUser, onOpenRegistration }) => {
     });
     const [apiError, setApiError] = useState('');
 
-    const handleSubmit = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = emailRegex.test(formData.email);
+    const isPasswordValid = formData.password.length >= 3;
+    const isFormValid = isEmailValid && isPasswordValid;
+
+    const handleSubmit = async (e) => {
+        if (e) e.preventDefault();
+        if (!isFormValid) return;
         try {
             const response = await api.post('/login', formData);
             
@@ -54,7 +61,7 @@ const LoginModal = ({ isOpen, onClose, setUser, onOpenRegistration }) => {
                 </div>
 
                 {/* Main Content */}
-                <div className='gap-5 w-full flex flex-col items-center'>
+                <form onSubmit={handleSubmit} className='gap-5 w-full flex flex-col items-center'>
                     <Input
                         label="Email*"
                         placeholder="you@example.com"
@@ -63,6 +70,8 @@ const LoginModal = ({ isOpen, onClose, setUser, onOpenRegistration }) => {
                             setFormData({ ...formData, email: e.target.value });
                             if (apiError) setApiError('');
                         }}
+                        error={formData.email.length > 0 && !isEmailValid}
+                        helperText={formData.email.length > 0 && !isEmailValid ? 'Invalid email format' : ''}
                     />
                     
                     <div className='flex flex-col w-full'>
@@ -75,21 +84,25 @@ const LoginModal = ({ isOpen, onClose, setUser, onOpenRegistration }) => {
                                 setFormData({ ...formData, password: e.target.value });
                                 if (apiError) setApiError('');
                             }}
+                            error={formData.password.length > 0 && !isPasswordValid}
+                            helperText={formData.password.length > 0 && !isPasswordValid ? 'Password must be at least 3 characters' : ''}
                         />
                         {apiError && <p className="text-helper-error type-body-xs mt-2">{apiError}</p>}
                     </div>
 
                     {/* Button */}
                     <Button 
+                        type="submit"
                         text='s' 
                         height='12' 
                         variant="primary" 
                         fullWidth={true} 
                         onClick={handleSubmit}
+                        disabled={!isFormValid}
                     >
                         Log In
                     </Button>
-                </div>
+                </form>
 
                 {/* Or sign up */}
                 <div className='gap-3 flex flex-col items-center'>

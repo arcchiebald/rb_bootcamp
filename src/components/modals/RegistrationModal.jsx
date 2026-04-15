@@ -17,13 +17,25 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
     });
     const [apiErrors, setApiErrors] = useState({});
 
-    const handleNext = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = emailRegex.test(formData.email);
+    const isPasswordValid = formData.password.length >= 3;
+    const isPasswordConfirmValid = isPasswordValid && formData.password === formData.password_confirmation;
+    const isUsernameValid = formData.username.length >= 3; 
+
+    const handleNext = (e) => {
+        if (e) e.preventDefault();
+        if (currentStage === 1 && !isEmailValid) return;
+        if (currentStage === 2 && !isPasswordConfirmValid) return;
+        
         if (currentStage < totalStages) {
             setCurrentStage(prev => prev + 1);
         }
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        if (e) e.preventDefault();
+        if (!isUsernameValid) return;
         const dataToSend = new FormData();
         dataToSend.append('email', formData.email);
         dataToSend.append('password', formData.password);
@@ -114,7 +126,8 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
                 </div>
 
                 {/* Main Content */}
-                <div
+                <form
+                    onSubmit={currentStage === totalStages ? handleSubmit : handleNext}
                     className='gap-5 w-full flex flex-col items-center'
                 >
                     {currentStage === 1 && (
@@ -127,8 +140,8 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
                                     setFormData({ ...formData, email: e.target.value });
                                     if (apiErrors.email) setApiErrors({ ...apiErrors, email: undefined });
                                 }}
-                                error={!!apiErrors.email}
-                                helperText={apiErrors.email ? apiErrors.email[0] : ''}
+                                error={!!apiErrors.email || (formData.email.length > 0 && !isEmailValid)}
+                                helperText={apiErrors.email ? apiErrors.email[0] : (formData.email.length > 0 && !isEmailValid) ? 'Invalid email format' : ''}
                             />
                         </>
                     )}
@@ -143,8 +156,8 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
                                     setFormData({ ...formData, password: e.target.value });
                                     if (apiErrors.password) setApiErrors({ ...apiErrors, password: undefined });
                                 }}
-                                error={!!apiErrors.password}
-                                helperText={apiErrors.password ? apiErrors.password[0] : ''}
+                                error={!!apiErrors.password || (formData.password.length > 0 && !isPasswordValid)}
+                                helperText={apiErrors.password ? apiErrors.password[0] : (formData.password.length > 0 && !isPasswordValid) ? 'Password must be at least 3 characters' : ''}
                             />
                             <Input
                                 label="Confirm Password*"
@@ -155,8 +168,8 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
                                     setFormData({ ...formData, password_confirmation: e.target.value });
                                     if (apiErrors.password_confirmation) setApiErrors({ ...apiErrors, password_confirmation: undefined });
                                 }}
-                                error={!!apiErrors.password_confirmation}
-                                helperText={apiErrors.password_confirmation ? apiErrors.password_confirmation[0] : ''}
+                                error={!!apiErrors.password_confirmation || (formData.password_confirmation.length > 0 && (!isPasswordValid || formData.password_confirmation !== formData.password))}
+                                helperText={apiErrors.password_confirmation ? apiErrors.password_confirmation[0] : (formData.password_confirmation.length > 0 && formData.password_confirmation !== formData.password) ? 'Passwords do not match' : ''}
                             />
                         </>
 
@@ -189,15 +202,21 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
 
                     {/* Button */}
                     <Button
+                        type="submit"
                         text='s'
                         height='12'
                         variant="primary"
                         fullWidth={true}
                         onClick={currentStage === totalStages ? handleSubmit : handleNext}
+                        disabled={
+                            (currentStage === 1 && !isEmailValid) ||
+                            (currentStage === 2 && !isPasswordConfirmValid) ||
+                            (currentStage === 3 && !isUsernameValid)
+                        }
                     >
                         {currentStage === totalStages ? 'Sign Up' : 'Next'}
                     </Button>
-                </div>
+                </form>
 
                 {/* Or login */}
                 <div
