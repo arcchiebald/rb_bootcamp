@@ -23,7 +23,7 @@ export const EnrollmentCard = ({
     progressPercent = 65,
 }) => {
     return (
-        <div className={`box-border flex flex-col items-start p-5 gap-4.5 w-155.75 min-h-73.75  bg-greyscale-50 rounded-xl hover:border-[0.5px] hover:border-purple-200 active:border active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] transition-colors duration-200`}>
+        <div className={`box-border flex flex-col items-start p-5 gap-4.5 w-155.75 min-h-73.75 bg-greyscale-50 rounded-xl border border-transparent hover:border-purple-200 active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] transition-all duration-200`}>
             <div className="flex flex-col items-start gap-4 w-full">
                 {/* მთავარი ინფორმაციული ბლოკი (მარცხნივ სურათი, მარჯვნივ ტექსტები) */}
                 <div className="flex flex-row items-center gap-4.5 w-full">
@@ -101,7 +101,7 @@ export const EnrollmentCard = ({
                         </span>
                         <div className="relative w-full h-3.75 bg-purple-100 rounded-[30px] overflow-hidden">
                             <div
-                                className="absolute left-0 top-0 bottom-0 h-3.75 bg-purple-500 rounded-[30px]"
+                                className="absolute left-0 top-0 bottom-0 bg-purple-500 rounded-[30px]"
                                 style={{ width: `${progressPercent}%` }}
                             ></div>
                         </div>

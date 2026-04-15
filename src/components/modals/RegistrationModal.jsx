@@ -75,7 +75,6 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
                 }
             }
         }
-        console.log('Submitting:', Object.fromEntries(dataToSend));
     };
 
     const handleBack = () => {

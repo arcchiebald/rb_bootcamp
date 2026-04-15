@@ -1,7 +1,6 @@
-import React from 'react'
 import Button from './Button'
 
-const Navbar = ({ user, onOpenRegistration, onOpenLogin, onOpenProfile }) => {
+const Navbar = ({ user, onOpenRegistration, onOpenLogin, onOpenProfile, onOpenSidebar }) => {
   return (
     <nav className={`
         w-full h-27
@@ -38,7 +37,10 @@ const Navbar = ({ user, onOpenRegistration, onOpenLogin, onOpenProfile }) => {
 
           </div>) : (
           <div className='flex gap-9'>
-            <div className='flex items-center gap-2 text-greyscale-600 stroke-greyscale-600 hover:text-purple-500 hover:stroke-purple-500 transition-colors duration-200 type-body-l cursor-pointer'>
+            <div 
+              onClick={onOpenSidebar}
+              className='flex items-center gap-2 text-greyscale-600 stroke-greyscale-600 hover:text-purple-500 hover:stroke-purple-500 transition-colors duration-200 type-body-l cursor-pointer'
+            >
 
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13 7.58333V22.75M13 7.58333C13 6.43406 12.5434 5.33186 11.7308 4.5192C10.9181 3.70655 9.8159 3.25 8.66663 3.25H3.24996C2.96264 3.25 2.68709 3.36414 2.48393 3.5673C2.28076 3.77047 2.16663 4.04602 2.16663 4.33333V18.4167C2.16663 18.704 2.28076 18.9795 2.48393 19.1827C2.68709 19.3859 2.96264 19.5 3.24996 19.5H9.74996C10.6119 19.5 11.4386 19.8424 12.0481 20.4519C12.6576 21.0614 13 21.888 13 22.75M13 7.58333C13 6.43406 13.4565 5.33186 14.2692 4.5192C15.0818 3.70655 16.184 3.25 17.3333 3.25H22.75C23.0373 3.25 23.3128 3.36414 23.516 3.5673C23.7192 3.77047 23.8333 4.04602 23.8333 4.33333V18.4167C23.8333 18.704 23.7192 18.9795 23.516 19.1827C23.3128 19.3859 23.0373 19.5 22.75 19.5H16.25C15.388 19.5 14.5614 19.8424 13.9519 20.4519C13.3424 21.0614 13 21.888 13 22.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

@@ -31,6 +31,7 @@ const Modal = ({
 
     useEffect(() => {
         if (isOpen) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setRender(true);
             const timer = setTimeout(() => setVisible(true), 10);
             return () => clearTimeout(timer);

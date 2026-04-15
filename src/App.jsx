@@ -15,7 +15,6 @@ function App() {
       if (token) {
         try {
           const response = await api.get("/me");
-          console.log("Authenticated user:", response.data.data);
           setUser(response.data.data);
         } catch (error) {
           if (error.response?.status === 401) {
