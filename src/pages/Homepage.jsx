@@ -37,7 +37,7 @@ const Homepage = ({ user }) => {
             const fetchEnrollments = async () => {
                 setIsLoadingEnrollments(true)
                 try {
-                    const response = await api.get('/enrollments')
+                    const response = await api.get('/courses/in-progress')
                     setEnrolledCourses(response.data.data)
                 } catch (error) {
                     console.error("Failed to fetch enrollments:", error)
@@ -72,7 +72,7 @@ const Homepage = ({ user }) => {
 
             <HeroSlider />
 
-            {user && (
+            {(user && enrolledCourses.length > 0) && (
                 <div className='flex flex-col gap-8 w-full overflow-x-hidden'>
 
                     <div className='flex flex-col gap-1.5 w-full max-w-391.5 mx-auto px-4 2xl:px-0'>
@@ -118,7 +118,7 @@ const Homepage = ({ user }) => {
                                     <div className='pointer-events-none animate-pulse delay-150 shrink-0 snap-start'><ProgressCard blurred /></div>
                                  </>
                             ) : enrolledCourses.length > 0 ? (
-                                enrolledCourses.slice(0, 4).map(enrollment => (
+                                enrolledCourses.map(enrollment => (
                                     <div key={enrollment.id} className="shrink-0 snap-start">
                                         <ProgressCard
                                             title={enrollment.course.title}
