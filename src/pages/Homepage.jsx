@@ -88,7 +88,7 @@ const Homepage = ({ user }) => {
                         <div 
                             ref={scrollContainerRef}
                             onScroll={updateScrollPosition}
-                            className='flex flex-row overflow-x-auto overflow-y-hidden flex-nowrap gap-6 pb-4 snap-x hidden-scrollbar pr-[120px]'
+                            className='flex flex-row overflow-x-auto overflow-y-hidden flex-nowrap gap-6 pb-4 snap-x hidden-scrollbar pr-30'
                             style={{ 
                                 width: 'calc(100% + 120px)',
                                 maskImage: (isLoadingEnrollments || enrolledCourses.length > 3) 
@@ -118,7 +118,7 @@ const Homepage = ({ user }) => {
                                     <div className='pointer-events-none animate-pulse delay-150 shrink-0 snap-start'><ProgressCard blurred /></div>
                                  </>
                             ) : enrolledCourses.length > 0 ? (
-                                enrolledCourses.map(enrollment => (
+                                enrolledCourses.slice(0, 4).map(enrollment => (
                                     <div key={enrollment.id} className="shrink-0 snap-start">
                                         <ProgressCard
                                             title={enrollment.course.title}
