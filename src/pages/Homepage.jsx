@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+import api from '../services/api'
 import HeroSlider from '../components/HeroSlider'
 import EnrolledCard, { ProgressCard } from '../components/cards/ProgressCard'
 import DashboardCard from '../components/cards/DashboardCard'
@@ -5,6 +7,25 @@ import EnrollmentCard from '../components/cards/EnrollmentCard'
 import BlockedLectureCards from '../components/cards/BlockedLectureCards'
 import RegistrationModal from '../components/modals/RegistrationModal'
 const Homepage = ({ user }) => {
+    const [featuredCourses, setFeaturedCourses] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchFeaturedCourses = async () => {
+            try {
+                // The api base URL already has '/api', so we likely just need '/courses/featured'
+                const response = await api.get('/courses/featured')
+                setFeaturedCourses(response.data.data || [])
+            } catch (error) {
+                console.error("Failed to fetch featured courses:", error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchFeaturedCourses()
+    }, [])
+
     return (
         <div className="flex flex-col gap-16 items-center bg-greyscale-100">
 
@@ -41,9 +62,32 @@ const Homepage = ({ user }) => {
                     </div>
                 </div>
                 <div className='flex flex-row justify-between flex-wrap gap-6'>
-                    <DashboardCard />
-                    <DashboardCard />
-                    <DashboardCard />
+                    {isLoading ? (
+                        <>
+                            <div className='blur-[2px] opacity-60 pointer-events-none animate-pulse'><DashboardCard id={1} /></div>
+                            <div className='blur-[2px] opacity-60 pointer-events-none animate-pulse delay-75'><DashboardCard id={2} /></div>
+                            <div className='blur-[2px] opacity-60 pointer-events-none animate-pulse delay-150'><DashboardCard id={3} /></div>
+                        </>
+                    ) : featuredCourses.length > 0 ? (
+                        featuredCourses.map(course => (
+                            <DashboardCard
+                                key={course.id}
+                                id={course.id}
+                                image={course.image}
+                                title={course.title}
+                                description={course.description}
+                                instructor={course.instructor?.name}
+                                price={`$${course.basePrice}`}
+                                rating={course.avgRating}
+                            />
+                        ))
+                    ) : (
+                        <>
+                            <DashboardCard id={1} />
+                            <DashboardCard id={2} />
+                            <DashboardCard id={3} />
+                        </>
+                    )}
                 </div>
 
             </div>

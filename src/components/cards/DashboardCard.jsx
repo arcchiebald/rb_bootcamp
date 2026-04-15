@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../Button";
 import DashboardImage from "../../assets/dashboardcard_img.jpg";
 const PlaceholderImage = () => (
@@ -14,6 +15,7 @@ const StarIcon = () => (
 
 
 export const DashboardCard = ({
+    id,
     image = DashboardImage,
     instructor = "Marilyn Mango",
     rating = "4.9",
@@ -65,7 +67,9 @@ export const DashboardCard = ({
                     </span>
                 </div>
 
-                <Button variant='primary'>Details</Button>
+                <Link to={`/courses/${id}`}>
+                    <Button variant='primary'>Details</Button>
+                </Link>
             </div>
         </div>
     );
