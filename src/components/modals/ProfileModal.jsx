@@ -155,7 +155,7 @@ const ProfileModal = ({ isOpen, onClose, user, setUser }) => {
     }
   };
 
-  if (!isOpen) return null;
+  
 
   return (
     <Modal isOpen={isOpen} quit={true} onQuit={handleClose}>

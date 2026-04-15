@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const QuitIcon = () => {
     return (
@@ -17,6 +17,7 @@ const BackIcon = () => {
 }
 
 const Modal = ({
+    isOpen = false,
     width = "w-[460px]",
     height = 'h-auto',
     children,
@@ -25,15 +26,48 @@ const Modal = ({
     onBack = () => { },
     stages = null, // e.g. { current: 1, total: 3 }
 }) => {
+    const [render, setRender] = useState(isOpen);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        if (isOpen) {
+            setRender(true);
+            const timer = setTimeout(() => setVisible(true), 10);
+            return () => clearTimeout(timer);
+        } else {
+            setVisible(false);
+            const timer = setTimeout(() => setRender(false), 300);
+            return () => clearTimeout(timer);
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape' && quit && isOpen) {
+                onQuit();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [quit, onQuit, isOpen]);
+
+    if (!render) return null;
+
     return (
         <div 
-            className="fixed inset-0 flex items-center justify-center bg-[#00000040] z-50 transition-opacity duration-300"
+            className={`fixed inset-0 flex items-center justify-center bg-[#00000040] z-50 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
             onClick={onQuit}
         >
             <div
                 className={`relative ${width} ${height}
                          bg-greyscale-50 rounded-xl shadow-lg p-12.5
                          flex flex-col items-center gap-4
+                         transition-all duration-300 transform
+                         ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}
             `}
                 onClick={(e) => e.stopPropagation()}
             >

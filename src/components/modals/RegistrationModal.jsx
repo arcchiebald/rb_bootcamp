@@ -72,10 +72,11 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
         }
     };
 
-    if (!isOpen) return null;
+    
 
     return (
         <Modal
+            isOpen={isOpen}
             quit={true}
             onQuit={onClose}
             back={currentStage > 1}

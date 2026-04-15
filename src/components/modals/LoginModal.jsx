@@ -34,10 +34,11 @@ const LoginModal = ({ isOpen, onClose, setUser, onOpenRegistration }) => {
         }
     };
 
-    if (!isOpen) return null;
+    
 
     return (
         <Modal
+            isOpen={isOpen}
             quit={true}
             onQuit={onClose}
         >
