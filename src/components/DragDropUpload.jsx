@@ -47,13 +47,21 @@ const DragDropUpload = ({
 
     const handleFile = (file) => {
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        if (file && allowedTypes.includes(file.type)) {
+        const maxSize = 2 * 1024 * 1024;
+        
+        if (file) {
+            if (!allowedTypes.includes(file.type)) {
+                alert("Please upload a valid image file (JPG, PNG, or WebP).");
+                return;
+            }
+            if (file.size > maxSize) {
+                alert("File is too large. Please upload an image smaller than 2MB.");
+                return;
+            }
             if (!isControlled) {
                 setInternalFile(file);
             }
             onChange?.(file);
-        } else if (file) {
-            alert("Please upload a valid image file (JPG, PNG, or WebP).");
         }
     };
 
