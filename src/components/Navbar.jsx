@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, onOpenRegistration, onOpenLogin, onOpenProfile }) => {
   return (
     <nav className={`
         w-full h-27
@@ -33,8 +33,8 @@ const Navbar = ({ user }) => {
         {!user ? (
           <div className='h-15 flex gap-4.25'>
 
-            <Button variant='outline' className='h-full'>Log In</Button>
-            <Button variant='primary' className='h-full'>Sign Up</Button>
+            <Button onClick={onOpenLogin} variant='outline' className='h-full'>Log In</Button>
+            <Button onClick={onOpenRegistration} variant='primary' className='h-full'>Sign Up</Button>
 
           </div>) : (
           <div className='flex gap-9'>
@@ -49,12 +49,17 @@ const Navbar = ({ user }) => {
             </div>
 
 
-            <div className='relative flex h-14 w-14 cursor-pointer items-center justify-center overflow-visible rounded-full bg-purple-50 hover:ring-[1.5px] ring-purple-200 transition-shadow duration-200'>
-              <svg className='h-9.5 w-9.5' viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M30.0833 33.25V30.0833C30.0833 28.4036 29.416 26.7927 28.2283 25.605C27.0406 24.4173 25.4297 23.75 23.75 23.75H14.25C12.5703 23.75 10.9593 24.4173 9.77162 25.605C8.58389 26.7927 7.91663 28.4036 7.91663 30.0833V33.25" stroke="#736BEA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M19 17.4167C22.4978 17.4167 25.3333 14.5811 25.3333 11.0833C25.3333 7.58553 22.4978 4.75 19 4.75C15.5022 4.75 12.6666 7.58553 12.6666 11.0833C12.6666 14.5811 15.5022 17.4167 19 17.4167Z" stroke="#736BEA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              <div className='absolute -bottom-0.5 -right-0.5 h-4.25 w-4.25 rounded-full border-2 border-greyscale-50 bg-helper-warning transition-colors duration-200'></div>
+            <div onClick={onOpenProfile} className='relative flex h-14 w-14 cursor-pointer items-center justify-center overflow-visible rounded-full bg-purple-50 hover:ring-[1.5px] ring-purple-200 transition-shadow duration-200'>
+              {user.avatar ? (
+                <img src={user.avatar} alt="Avatar" className="h-full w-full rounded-full object-cover" />
+              ) : (
+                <svg className='h-9.5 w-9.5' viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M30.0833 33.25V30.0833C30.0833 28.4036 29.416 26.7927 28.2283 25.605C27.0406 24.4173 25.4297 23.75 23.75 23.75H14.25C12.5703 23.75 10.9593 24.4173 9.77162 25.605C8.58389 26.7927 7.91663 28.4036 7.91663 30.0833V33.25" stroke="#736BEA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M19 17.4167C22.4978 17.4167 25.3333 14.5811 25.3333 11.0833C25.3333 7.58553 22.4978 4.75 19 4.75C15.5022 4.75 12.6666 7.58553 12.6666 11.0833C12.6666 14.5811 15.5022 17.4167 19 17.4167Z" stroke="#736BEA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+              
+              <div className={`absolute -bottom-0.5 -right-0.5 h-4.25 w-4.25 rounded-full border-2 border-greyscale-50 transition-colors duration-200 ${user.profileComplete ? 'bg-helper-success' : 'bg-helper-warning'}`}></div>
             </div>
           </div>
         )}

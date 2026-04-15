@@ -3,7 +3,7 @@ import EnrolledCard, { ProgressCard } from '../components/cards/ProgressCard'
 import DashboardCard from '../components/cards/DashboardCard'
 import EnrollmentCard from '../components/cards/EnrollmentCard'
 import BlockedLectureCards from '../components/cards/BlockedLectureCards'
-
+import RegistrationModal from '../components/modals/RegistrationModal'
 const Homepage = ({ user }) => {
     return (
         <div className="flex flex-col gap-16 items-center bg-greyscale-100">

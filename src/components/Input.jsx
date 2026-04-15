@@ -1,18 +1,26 @@
-import { useState } from 'react';
+import { useState, useId } from 'react';
 
 const Input = ({
     label,
     placeholder = '',
     value,
     onChange,
+    onBlur,
+    disabled = false,
+    readOnly = false,
     type = 'text',
     error = false,
+    success = false,
     helperText = '',
     className = '',
     name = '',
-    id = '',
+    id,
     defaultValue = '',
+    prefix = '',
 }) => {
+    const generatedId = useId();
+    const inputId = id || generatedId;
+
     const [internalValue, setInternalValue] = useState(defaultValue || '');
     const [showPassword, setShowPassword] = useState(false);
 
@@ -35,29 +43,39 @@ const Input = ({
     if (error) {
         borderColorClass = 'border-helper-error';
         titleColorClass = 'text-helper-error';
+    } else if (success) {
+        borderColorClass = 'border-helper-success';
     } else if (isFilled) {
         borderColorClass = 'border-greyscale-300 placeholder:text-greyscale-100';
     }
 
     return (
-        <div className={`flex flex-col gap-2 w-[320px] ${className}`}>
+        <div className={`flex flex-col gap-2 w-full ${className}`}>
             {label && (
-                <label htmlFor={id} className={`block w-full h-4.25 type-body-xs font-medium ${titleColorClass}`}>
+                <label htmlFor={inputId} className={`block w-full h-4.25 type-body-xs ${titleColorClass}`}>
                     {label}
                 </label>
             )}
 
-            <div className="relative">
+            <div className="relative flex items-center">
+                {prefix && (
+                    <span className="absolute left-3.25 inset-y-0 flex items-center type-body-xs text-greyscale-300 pointer-events-none select-none">
+                        {prefix}
+                    </span>
+                )}
                 <input
-                    id={id}
+                    id={inputId}
                     name={name}
                     type={inputType}
                     placeholder={placeholder}
                     value={currentValue}
                     onChange={handleChange}
+                    onBlur={onBlur}
+                    disabled={disabled}
+                    readOnly={readOnly}
                     className={`
-            w-[320px] h-12
-            px-3.25 py-3
+            w-full h-12
+            ${prefix ? 'pl-13 pr-3.25' : 'px-3.25'} py-3
             rounded-lg
             border-[1.5px]
             outline-none
@@ -66,15 +84,26 @@ const Input = ({
             placeholder:text-greyscale-400
             caret-greyscale-400
             ${borderColorClass}
-            ${type === 'password' ? 'pr-10' : ''}
+            ${type === 'password' ? 'pr-10' : success ? 'pr-10' : ''}
+            ${disabled ? 'opacity-50 cursor-not-allowed bg-greyscale-50' : 'bg-transparent'}
+            ${type === 'number' ? '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' : ''}
 
             hover:border-greyscale-300 hover:placeholder:text-greyscale-200
             focus:border-greyscale-300 focus:placeholder:text-greyscale-100
             active:border-greyscale-300 active:placeholder:text-greyscale-100
 
             ${error ? 'hover:border-helper-error focus:border-helper-error active:border-helper-error text-helper-error' : ''}
+            ${success ? 'hover:border-helper-success focus:border-helper-success active:border-helper-success' : ''}
           `}
                 />
+
+                {success && type !== 'password' && (
+                    <div className="absolute right-3.25 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 6L9 17L4 12" stroke="#1DC31D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                    </div>
+                )}
 
                 {type === 'password' && (
                     <button

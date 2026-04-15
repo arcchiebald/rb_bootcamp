@@ -2,19 +2,20 @@ const Button = ({
   children,
   variant = 'primary',
   type = 'button',
+  text = 'm',
   onClick,
   disabled,
   fullWidth = false,
+  height = null,
   className = '',
 }) => {
 
-  // ვარიაციები ფიგმის მიხედვით
   const variants = {
     primary: `
-      min-w-[114px] h-[58px]
+      min-w-[114px] ${height ? 'h-' + height : 'h-[58px]'}
       py-[17px] px-[25px]
       rounded-[8px] gap-[10px] cursor-pointer
-      flex items-center justify-center opacity-100 text-greyscale-50 type-buttons-m 
+      flex items-center justify-center opacity-100 text-greyscale-50 type-buttons-${text} 
       bg-purple-500 
       hover:bg-purple-600 
       active:bg-purple-700
@@ -22,10 +23,10 @@ const Button = ({
       disabled:bg-greyscale-300 disabled:text-greyscale-400 disabled:cursor-not-allowed
     `,
     outline: `
-      min-w-[96px] h-[48px]
+      min-w-[96px] ${height ? 'h-' + height : 'h-[48px]'}
       py-[12px] px-[16px] 
       rounded-[8px] gap-[2px] cursor-pointer
-      flex items-center justify-center type-buttons-m text-purple-500
+      flex items-center justify-center type-buttons-${text} text-purple-500
       border-[2px] border-purple-300 
       hover:bg-purple-600 hover:text-greyscale-50 hover:border-0
       active:bg-purple-700 active:text-greyscale-50 active:border-0
@@ -33,9 +34,9 @@ const Button = ({
       disabled:bg-greyscale-300 disabled:text-greyscale-400 disabled:border-[1px] disabled:border-greyscale-400 disabled:cursor-not-allowed
     `,
     ghost: `
-      min-w-[75px] h-[48px]
+      min-w-[75px] ${height ? 'h-' + height : 'h-[48px]'}
       py-[1px] gap-[10px]
-      type-buttons-s text-purple-500
+      type-buttons-${text} text-purple-500
       border-b-1 border-purple-500 cursor-pointer
       hover:border-purple-600 hover:text-purple-600
       active:border-purple-700 active:text-purple-700
