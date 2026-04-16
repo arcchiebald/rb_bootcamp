@@ -1,6 +1,7 @@
-
 import enrollmentImg from '../../assets/dashboardcard_img.jpg';
 import Button from '../Button';
+import { Link } from "react-router-dom";
+
 
 // პლეისჰოლდერები ხატულებისთვის
 const PlaceholderImage = () => (
@@ -16,6 +17,7 @@ const StarIcon = () => (
 );
 
 export const EnrollmentCard = ({
+    id,
     image = enrollmentImg,
     instructor = "Sarah Johnson",
     rating = "4.9",
@@ -122,7 +124,11 @@ export const EnrollmentCard = ({
                             ></div>
                         </div>
                     </div>
-                    <Button variant="outline" fullWidth>View</Button>
+                    <Link to={`/courses/${id}`} className="w-full">
+                        <Button variant="outline" fullWidth>
+                            View
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>

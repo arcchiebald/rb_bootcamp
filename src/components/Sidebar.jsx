@@ -69,8 +69,7 @@ const Sidebar = ({ isOpen, onClose, enrolledCourses = [], isLoadingEnrollments }
                   Your learning journey starts here! Browse courses to get started.
                 </p>
               </div>
-              {/* TODO: Redirect to Courses Page */}
-              <Button variant="primary" className='mt-2'><a href="#">Browse Courses</a></Button>
+              <Button variant="primary" className='mt-2'><a href="/courses">Browse Courses</a></Button>
             </div>
 
           ) : (
@@ -78,6 +77,7 @@ const Sidebar = ({ isOpen, onClose, enrolledCourses = [], isLoadingEnrollments }
               {enrolledCourses.map((enrollment) => (
                 <EnrollmentCard
                   key={enrollment.id}
+                  id={enrollment.course.id}
                   title={enrollment.course.title}
                   instructor={enrollment.course.instructor.name}
                   rating={enrollment.course.avgRating}

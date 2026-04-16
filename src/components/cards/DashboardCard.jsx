@@ -24,7 +24,7 @@ export const DashboardCard = ({
     price = "$299",
 }) => {
     return (
-        <div className={`box-border flex flex-col items-start p-5 gap-6 w-126.5 min-h-144 bg-greyscale-50 border border-greyscale-100 rounded-xl hover:border-[0.5px] hover:border-purple-200 hover:shadow-[0px_0px_25px_0px_#8A82D440] active:border active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] transition-all duration-300`}>
+        <div className={`box-border flex flex-col items-start p-5 justify-between w-126.5 bg-greyscale-50 border border-greyscale-100 rounded-xl hover:border-[0.5px] hover:border-purple-200 hover:shadow-[0px_0px_25px_0px_#8A82D440] active:border active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] transition-all duration-300`}>
             <div className="flex flex-col items-start gap-4 w-full">
                 <div className="w-full h-65.5 rounded-[10px] overflow-hidden bg-gray-100">
                     {image ? <img src={image} alt={title} className="w-full h-full object-cover" /> : <PlaceholderImage />}
@@ -68,7 +68,7 @@ export const DashboardCard = ({
                 </div>
 
                 <Link to={`/courses/${id}`}>
-                    <Button variant='primary'>Details</Button>
+                    <Button variant='primary' className="type-buttons-m">Details</Button>
                 </Link>
             </div>
         </div>
