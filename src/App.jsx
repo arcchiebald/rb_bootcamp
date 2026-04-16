@@ -5,6 +5,7 @@ import MainLayout from "./layouts/MainLayout"
 import api from "./services/api"
 import Thumbnail from "./assets/Thumbnail.png"
 import CourseCatalog from "./pages/CourseCatalog"
+import CoursePage from "./pages/CoursePage"
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -38,7 +39,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout user={user} setUser={setUser} />}>
           <Route index element={<Homepage user={user}/>} />
-          <Route path='catalog' element={<CourseCatalog user={user} />} />
+          <Route path='browse' element={<CourseCatalog user={user} />} />
+          <Route path='course/:id' element={<CoursePage />} />
         </Route>
           <Route path="*" element={<div className="w-screen h-screen flex flex-col items-center justify-center bg-white text-purple-900 type-heading-1 gap-10"><img src={Thumbnail} alt="Redberry Bootcamp XI" className="w-150" />Page Not Found</div>} />
 
