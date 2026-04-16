@@ -17,4 +17,23 @@ api.interceptors.request.use(config => {
   return Promise.reject(error);
 });
 
+export const coursesApi = {
+  getCourseById: (id) => api.get(`/courses/${id}`),
+  getWeeklySchedules: (id) => api.get(`/courses/${id}/weekly-schedules`),
+  getTimeSlots: (id, weeklyScheduleId) => api.get(`/courses/${id}/time-slots`, {
+    params: { weekly_schedule_id: weeklyScheduleId },
+  }),
+  getSessionTypes: (id, weeklyScheduleId, timeSlotId) => api.get(`/courses/${id}/session-types`, {
+    params: {
+      weekly_schedule_id: weeklyScheduleId,
+      time_slot_id: timeSlotId,
+    },
+  }),
+  enrollInCourse: ({ courseId, courseScheduleId, force = false }) => api.post('/enrollments', {
+    courseId,
+    courseScheduleId,
+    force,
+  }),
+};
+
 export default api;

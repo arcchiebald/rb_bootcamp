@@ -51,18 +51,23 @@ const formatDaysLabel = (days) => {
 const WeekDays = ({
     days = ["monday", "wednesday"],
     disabled = false,
+    selected = false,
     onClick,
 }) => {
     const daysLabel = formatDaysLabel(days);
 
     // CSS Classes based on disabled state
-    const boxClasses = disabled 
-        ? "bg-greyscale-100 border-greyscale-200 cursor-not-allowed" 
-        : "bg-greyscale-50 border-greyscale-200 group cursor-pointer hover:bg-purple-100 hover:border-purple-300 transition-colors duration-300";
+    const boxClasses = disabled
+        ? "bg-greyscale-100 border-greyscale-200 cursor-not-allowed"
+        : selected
+            ? "bg-purple-100 border-purple-500 group cursor-pointer"
+            : "bg-greyscale-50 border-greyscale-200 group cursor-pointer hover:bg-purple-100 hover:border-purple-300 transition-colors duration-300";
     
-    const textClasses = disabled 
-        ? "text-greyscale-200" 
-        : "text-greyscale-800 group-hover:text-purple-500 transition-colors duration-300";
+    const textClasses = disabled
+        ? "text-greyscale-200"
+        : selected
+            ? "text-purple-500"
+            : "text-greyscale-800 group-hover:text-purple-500 transition-colors duration-300";
 
     return (
         <div 

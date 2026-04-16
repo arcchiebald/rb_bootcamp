@@ -1,23 +1,32 @@
 const TimeSlot = ({
     variant = "morning",
+    label,
+    time,
     disabled = false,
+    selected = false,
     onClick,
 }) => {
-    const title = variant.charAt(0).toUpperCase() + variant.slice(1); // Capitalize first letter for display
-    const time = variant === "morning" ? "9:00 AM – 12:00 PM" : variant === "afternoon" ? "12:00 PM – 6:00 PM" : "6:00 PM – 9:00 PM";
+    const resolvedTitle = label || (variant.charAt(0).toUpperCase() + variant.slice(1));
+    const resolvedTime = time || (variant === "morning" ? "9:00 AM - 12:00 PM" : variant === "afternoon" ? "12:00 PM - 6:00 PM" : "6:00 PM - 9:00 PM");
     // CSS Classes based on disabled state
-    const boxClasses = disabled 
-        ? "bg-greyscale-100 border-greyscale-200 cursor-not-allowed" 
-        : "bg-greyscale-50 border-greyscale-200 group cursor-pointer hover:bg-purple-100 hover:border-purple-300 transition-colors duration-300";
+    const boxClasses = disabled
+        ? "bg-greyscale-100 border-greyscale-200 cursor-not-allowed"
+        : selected
+            ? "bg-purple-100 border-purple-500 group cursor-pointer"
+            : "bg-greyscale-50 border-greyscale-200 group cursor-pointer hover:bg-purple-100 hover:border-purple-300 transition-colors duration-300";
     
     // Figma states Icon/Title/Time are all #666666 except icon might be #525252, but let's use the same as requested or group them
-    const iconClasses = disabled 
-        ? "text-greyscale-200" 
-        : "text-greyscale-600 group-hover:text-purple-500 transition-colors duration-300";
+    const iconClasses = disabled
+        ? "text-greyscale-200"
+        : selected
+            ? "text-purple-500"
+            : "text-greyscale-600 group-hover:text-purple-500 transition-colors duration-300";
 
-    const textClasses = disabled 
-        ? "text-greyscale-200" 
-        : "text-greyscale-500 group-hover:text-purple-500 transition-colors duration-300";
+    const textClasses = disabled
+        ? "text-greyscale-200"
+        : selected
+            ? "text-purple-500"
+            : "text-greyscale-500 group-hover:text-purple-500 transition-colors duration-300";
 
     const timeSlotIcons = {
         morning: (
@@ -51,10 +60,10 @@ const TimeSlot = ({
                 {/* Text Container */}
                 <div className="flex flex-col items-start gap-0.5 flex-1">
                     <span className={`type-body-xs ${textClasses}`}>
-                        {title}
+                        {resolvedTitle}
                     </span>
                     <span className={`type-micro-helper-regular-xs ${textClasses}`}>
-                        {time}
+                        {resolvedTime}
                     </span>
                 </div>
             </div>

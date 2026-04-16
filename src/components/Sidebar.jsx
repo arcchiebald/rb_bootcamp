@@ -83,6 +83,10 @@ const Sidebar = ({ isOpen, onClose, enrolledCourses = [], isLoadingEnrollments }
                   rating={enrollment.course.avgRating}
                   image={enrollment.course.image}
                   progressPercent={enrollment.progress}
+                  weeklySchedule={enrollment.schedule?.weeklySchedule?.label || 'Schedule TBA'}
+                  timeSlot={enrollment.schedule?.timeSlot?.label || 'Time slot TBA'}
+                  sessionType={enrollment.schedule?.sessionType?.name || 'online'}
+                  location={enrollment.schedule?.location}
                 />
               ))}
             </div>

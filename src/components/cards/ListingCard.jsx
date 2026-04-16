@@ -1,5 +1,6 @@
 import EnrollmentImage from "../../assets/dashboardcard_img.jpg";
 import ChipCategory from "../chips/ChipCategory";
+import { Link } from "react-router-dom";
 // პლეისჰოლდერები ხატულებისთვის
 const PlaceholderImage = () => (
   <div className="w-full h-full bg-gray-200 rounded-[10px] flex items-center justify-center text-gray-400">
@@ -21,6 +22,7 @@ const CategoryIcon = () => (
 );
 
 export const ListingCard = ({
+  id,
   image = EnrollmentImage,
   instructor = "Marilyn Mango",
   duration = "12 Weeks",
@@ -82,9 +84,11 @@ export const ListingCard = ({
           </span>
         </div>
 
-        <button className="flex flex-row h-full justify-center items-center px-6.25 py-4.25 bg-purple-500 rounded-lg text-greyscale-50 type-buttons-s hover:bg-indigo-700 transition-colors">
-          {buttonText}
-        </button>
+        <Link to={id ? `/courses/${id}` : '#'}>
+          <button disabled={!id} className="flex flex-row h-full justify-center items-center px-6.25 py-4.25 bg-purple-500 rounded-lg text-greyscale-50 type-buttons-s hover:bg-indigo-700 transition-colors disabled:bg-greyscale-300 disabled:text-greyscale-400 disabled:cursor-not-allowed">
+            {buttonText}
+          </button>
+        </Link>
       </div>
     </div>
   );

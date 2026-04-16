@@ -105,7 +105,7 @@ const CourseCatalog = () => {
     return (
         <div className="flex flex-col gap-6 bg-greyscale-100">
             <div className="flex flex-row gap-8 w-full max-w-391.5 mx-auto px-4 2xl:px-0">
-                <Breadcrumbs pages={{ pages: ['Home', 'Browse'], hrefs: ['/', '/browse'], currentPage: 'Browse' }} />
+                <Breadcrumbs pages={{ pages: ['Home', 'Browse'], hrefs: ['/', '/courses'], currentPage: 'Browse' }} />
             </div>
             <div className='flex flex-row justify-between gap-8 w-full max-w-391.5 mx-auto px-4 2xl:px-0 items-stretch'>
 
@@ -206,6 +206,7 @@ const CourseCatalog = () => {
                             courses.map((course) => (
                                 <ListingCard 
                                     key={course.id}
+                                    id={course.id}
                                     image={course.image}
                                     instructor={course.instructor?.name || "Unknown"}
                                     duration={`${course.durationWeeks} Weeks`}

@@ -1,6 +1,7 @@
 const Session = ({
     type = 'in_person', // 'Online', 'In-Person', 'Hybrid'
     disabled = false,
+    selected = false,
     onClick,
     address = null,
     priceOffset = 50,
@@ -9,16 +10,22 @@ const Session = ({
     const isFullyBooked = seatsLeft === 0;
     const isDisabled = disabled || isFullyBooked;
 
-    const name = type === 'in_person' ? 'In-Person' : type === 'online' ? 'Online' : type === 'hybrid' ? 'Hybrid' : 'Online';
+    const normalizedType = String(type || 'online').toLowerCase().replace('-', '_');
+
+    const name = normalizedType === 'in_person' ? 'In-Person' : normalizedType === 'online' ? 'Online' : normalizedType === 'hybrid' ? 'Hybrid' : 'Online';
 
     // CSS Classes based on state
     const boxClasses = isDisabled
         ? "bg-greyscale-100 border-greyscale-200 cursor-not-allowed"
-        : "bg-greyscale-50 border-greyscale-100 group cursor-pointer hover:bg-purple-100 hover:border-purple-300 transition-colors duration-300";
+        : selected
+            ? "bg-purple-100 border-purple-500 group cursor-pointer"
+            : "bg-greyscale-50 border-greyscale-100 group cursor-pointer hover:bg-purple-100 hover:border-purple-300 transition-colors duration-300";
 
     const textClasses = isDisabled
         ? "text-greyscale-200"
-        : "text-greyscale-600 transition-colors duration-300 group-hover:text-purple-500";
+        : selected
+            ? "text-purple-500"
+            : "text-greyscale-600 transition-colors duration-300 group-hover:text-purple-500";
 
     const priceClasses = isDisabled
         ? "text-greyscale-200"
@@ -56,7 +63,7 @@ const Session = ({
             >
                 {/* Icon */}
                 <div>
-                    {sessionIcons[type] || sessionIcons.online}
+                    {sessionIcons[normalizedType] || sessionIcons.online}
 
                 </div>
 
@@ -87,7 +94,7 @@ const Session = ({
             )}
 
             {isFullyBooked && (
-                <span className="type-micro-helper-medium text-greyscale-700">No Seats Available</span>
+                <span className="type-micro-helper-medium text-greyscale-700">Fully Booked</span>
             )}
 
             {/* Warning Message */}

@@ -75,7 +75,7 @@ const Modal = ({
                 {(stages && stages.current != 1) && (
                     <button
                         onClick={onBack}
-                        className="absolute top-5 left-4"
+                        className="absolute top-5 left-4 hover:cursor-pointer"
                     >
                         <BackIcon />
                     </button>
@@ -83,7 +83,7 @@ const Modal = ({
                 {quit && (
                     <button
                         onClick={onQuit}
-                        className="absolute top-5 right-4"
+                        className="absolute top-5 right-4 hover:cursor-pointer"
                     >
                         <QuitIcon />
                     </button>
