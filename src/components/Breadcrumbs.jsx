@@ -10,10 +10,10 @@ const Breadcrumbs = ({ pages }) => {
 
     return (
         <div>
-            <div className='flex gap-1 items-center type-body-m px-0.5 py-1 text-greyscale-500'>
+            <div className='flex gap-2 items-center type-body-m px-0.5 py-1 text-greyscale-500'>
                 {pages.pages.map((page, index) => (
                     <React.Fragment key={index}>
-                        <a href={pages.hrefs[index]} className={page === pages.currentPage ? 'text-purple-500 hover:text-purple-600' : 'text-greyscale-500 hover:text-greyscale-600'}>
+                        <a href={pages.hrefs[index]} className={page === pages.currentPage ? 'text-purple-400 hover:text-purple-500' : 'text-greyscale-500 hover:text-greyscale-600'}>
                             {page}
                         </a>
                         {index < pages.pages.length - 1 && <RightArrow />}
