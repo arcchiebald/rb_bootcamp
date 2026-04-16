@@ -6,7 +6,6 @@ import Sidebar from '../components/Sidebar';
 import RegistrationModal from '../components/modals/RegistrationModal';
 import LoginModal from '../components/modals/LoginModal';
 import ProfileModal from '../components/modals/ProfileModal';
-import EnrollmentCard from '../components/cards/EnrollmentCard';
 import api from '../services/api';
 
 const MainLayout = ({ user, setUser }) => {
@@ -62,7 +61,12 @@ const MainLayout = ({ user, setUser }) => {
         }} />
       </main>
 
-      <Footer />
+      <Footer
+        onOpenSidebar={() => setIsSidebarOpen(true)}
+        user={user}
+        onOpenProfile={() => setIsProfileModalOpen(true)}
+        onOpenLogin={() => setIsLoginModalOpen(true)}
+      />
       <Sidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)} 

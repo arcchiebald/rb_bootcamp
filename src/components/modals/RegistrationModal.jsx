@@ -230,7 +230,7 @@ const RegistrationModal = ({ isOpen, onClose, setUser, onOpenLogin }) => {
                         Already have an account?
                         <button 
                             onClick={onOpenLogin}
-                            className="pl-2 type-underlined-s text-greyscale-900 focus:outline-none"
+                            className="pl-2 type-underlined-s text-greyscale-900 focus:outline-none hover:cursor-pointer"
                         >
                             Log In
                         </button>

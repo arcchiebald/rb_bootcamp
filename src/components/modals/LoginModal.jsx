@@ -118,7 +118,7 @@ const LoginModal = ({ isOpen, onClose, setUser, onOpenRegistration }) => {
                                 onClose();
                                 onOpenRegistration();
                             }} 
-                            className="pl-2 type-underlined-s text-greyscale-900 focus:outline-none"
+                            className="pl-2 type-underlined-s text-greyscale-900 focus:outline-none hover:cursor-pointer"
                         >
                             Sign Up
                         </button>

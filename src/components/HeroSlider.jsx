@@ -12,7 +12,7 @@ const slides = [
         development, business, and more. Find the skills you need to grow your 
         career and learn at your own pace.`,
         buttonText: "Browse Courses",
-        buttonLink: "/browse",
+        buttonLink: "/courses",
         image: hero1,
         bgPos: "center -300px"
     },
@@ -22,7 +22,7 @@ const slides = [
         Continue your enrolled courses, track your progress, 
         and stay on track toward completing your goals.`,
         buttonText: "Start Learning",
-        buttonLink: "/browse",
+        buttonLink: "/courses",
         image: hero2,
         bgPos: "center -150px"
     },
@@ -30,7 +30,7 @@ const slides = [
         id: 3,
         description: `‎`,
         buttonText: "Learn More",
-        buttonLink: "/browse",
+        buttonLink: "/courses",
         title: "Learn together, grow faster",
         image: hero3,
         bgPos: "center -60px"
