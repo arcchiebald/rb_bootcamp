@@ -36,7 +36,7 @@ const Icon = ({ icon, active }) => {
       )
     default:
       return (
-        <span className="text-greyscale-600 group-hover:text-purple-600 group-disabled:text-greyscale-600 transition-all duration-300 ease-in-out">Icon</span>
+        <span className="text-greyscale-600 group-hover:text-purple-600 group-disabled:text-greyscale-600 transition-colors duration-200">Icon</span>
       );
   }
 
@@ -52,14 +52,15 @@ const ChipCategory = ({ icon, name, disabled, onClick, active }) => {
                     w-max h-9.75 flex cursor-pointer 
                     ${active ? 'bg-purple-100 border-purple-600' : 'bg-greyscale-50 border-transparent'}
                     hover:bg-purple-100 
-                    border
-                    active:scale-95 active:border-purple-600 
+                    border box-border
+                    transition-colors duration-200
+                    active:border-purple-600 
                     disabled:bg-greyscale-100 disabled:cursor-default disabled:border-transparent
                     rounded-xl py-2 px-3 gap-2.5 
                     group`}
     >
       <Icon icon={icon} active={active} />
-      <span className={`${active ? 'text-purple-600' : 'text-greyscale-600'} group-hover:text-purple-600 group-disabled:text-greyscale-600 transition-all duration-300 ease-in-out`}>{name}</span>
+      <span className={`${active ? 'text-purple-600' : 'text-greyscale-600'} group-hover:text-purple-600 group-disabled:text-greyscale-600 transition-colors duration-200`}>{name}</span>
     </button>
   )
 }

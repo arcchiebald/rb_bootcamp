@@ -8,8 +8,9 @@ const ChipTopic = ({ name, active = false, onClick, disabled = false }) => {
                     w-max h-9.75 flex cursor-pointer 
                     ${active ? 'bg-purple-100 border border-purple-600' : 'bg-greyscale-50 border border-transparent'} 
                     hover:bg-purple-100 
-                    active:scale-95 active:border-purple-600 
+                    active:border-purple-600 
                     disabled:bg-greyscale-100 disabled:cursor-not-allowed disabled:border-transparent
+                    transition-colors duration-200
                     rounded-xl py-2 px-3 gap-2.5 
                     group`}
     >
