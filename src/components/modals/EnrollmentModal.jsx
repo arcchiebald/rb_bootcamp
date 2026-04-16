@@ -67,9 +67,14 @@ const EnrollmentModal = ({
   onSecondaryAction,
   onRate,
   initialRating = 0,
+  isRated = false,
 }) => {
   const [rating, setRating] = useState(initialRating);
   const [hoverRating, setHoverRating] = useState(0);
+
+  React.useEffect(() => {
+    setRating(initialRating);
+  }, [initialRating]);
 
   const resolvedCourseName = courseName || 'this course';
   const resolvedConflictSchedule = conflictSchedule || 'the same schedule';
@@ -90,7 +95,7 @@ const EnrollmentModal = ({
         return {
           icon: <ConflictIcon />,
           title: 'Enrollment Conflict',
-          description: `You are already enrolled in "${resolvedCourseName}" with the same schedule: ${resolvedConflictSchedule}. Are you sure you want to continue?`,
+          description: `You are already enrolled in "${resolvedCourseName}" with the same schedule: ${resolvedConflictSchedule}`,
           primaryLabel: 'Continue Anyway',
           secondaryLabel: 'Cancel',
           showRating: false,
@@ -100,7 +105,7 @@ const EnrollmentModal = ({
         return {
           icon: <CongratulationsIcon />,
           title: 'Congratulations!',
-          description: `You've completed "${resolvedCourseName}"!`,
+          description: `You've completed "${resolvedCourseName}" Course!`,
           primaryLabel: 'Done',
           secondaryLabel: null,
           showRating: true,
@@ -111,7 +116,7 @@ const EnrollmentModal = ({
         return {
           icon: <ConfirmIcon />,
           title: 'Enrollment Confirmed!',
-          description: `You've successfully enrolled to "${resolvedCourseName}"!`,
+          description: `You've successfully enrolled to "${resolvedCourseName}" Course!`,
           primaryLabel: 'Done',
           secondaryLabel: null,
           showRating: false,
@@ -121,6 +126,7 @@ const EnrollmentModal = ({
   }, [variant, text, resolvedCourseName, resolvedConflictSchedule]);
 
   const handleRate = (nextRating) => {
+    if (isRated) return;
     setRating(nextRating);
     if (onRate) onRate(nextRating);
   };
@@ -155,16 +161,16 @@ const EnrollmentModal = ({
           <div className="flex w-full max-w-75.5 flex-col items-center gap-4.5">
             <p className="type-body-s text-purple-400">Rate your experience</p>
             <div
-              className="flex items-center justify-center gap-4.5"
-              onMouseLeave={() => setHoverRating(0)}
+              className={`flex items-center justify-center gap-4.5 ${isRated ? 'pointer-events-none' : ''}`}
+              onMouseLeave={() => !isRated && setHoverRating(0)}
             >
               {[1, 2, 3, 4, 5].map((value) => {
                 const isFilled = value <= rating;
-                const isHoveredPreview = hoverRating > 0 && value <= hoverRating && !isFilled;
+                const isHoveredPreview = !isRated && hoverRating > 0 && value <= hoverRating && !isFilled;
 
                 if (isFilled) {
                   return (
-                    <div key={value} onMouseEnter={() => setHoverRating(value)}>
+                    <div key={value} onMouseEnter={() => !isRated && setHoverRating(value)}>
                       <FullStar onClick={() => handleRate(value)} />
                     </div>
                   );
@@ -172,14 +178,14 @@ const EnrollmentModal = ({
 
                 if (isHoveredPreview) {
                   return (
-                    <div key={value} onMouseEnter={() => setHoverRating(value)}>
+                    <div key={value} onMouseEnter={() => !isRated && setHoverRating(value)}>
                       <HoverStar onClick={() => handleRate(value)} />
                     </div>
                   );
                 }
 
                 return (
-                  <div key={value} onMouseEnter={() => setHoverRating(value)}>
+                  <div key={value} onMouseEnter={() => !isRated && setHoverRating(value)}>
                     <EmptyStar onClick={() => handleRate(value)} />
                   </div>
                 );

@@ -34,6 +34,9 @@ export const coursesApi = {
     courseScheduleId,
     force,
   }),
+  completeCourse: (enrollmentId) => api.patch(`/enrollments/${enrollmentId}/complete`),
+  rateCourse: (courseId, rating) => api.post(`/courses/${courseId}/reviews`, { rating }),
+  deleteEnrollment: (enrollmentId) => api.delete(`/enrollments/${enrollmentId}`),
 };
 
 export default api;

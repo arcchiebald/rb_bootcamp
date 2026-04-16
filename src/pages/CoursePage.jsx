@@ -6,6 +6,7 @@ import ChipInstructor from "../components/chips/ChipInstructor";
 import Schedule from "../components/schedules/Schedule";
 import { coursesApi } from "../services/api";
 import EnrollmentModal from "../components/modals/EnrollmentModal";
+import ProgressEnrolled from "../components/schedules/ProgressEnrolled";
 
 
 const PlaceholderImage = () => (
@@ -335,6 +336,42 @@ const CoursePage = ({ user }) => {
         }
     };
 
+    const runCompleteCourse = async () => {
+        try {
+            await coursesApi.completeCourse(course.enrollment.id);
+            await fetchCourse();
+            setModalState({
+                isOpen: true,
+                variant: "congratulations",
+                text: `Course Completed!`,
+                courseName: `${course?.title}`,
+                conflictSchedule: "",
+                onPrimaryAction: closeEnrollmentModal,
+                onSecondaryAction: null,
+            });
+        } catch (error) {
+            console.error("Failed to complete course", error);
+        }
+    };
+
+    const runRateCourse = async (ratingVal) => {
+        try {
+            await coursesApi.rateCourse(id, ratingVal);
+            await fetchCourse();
+        } catch (error) {
+            console.error("Failed to rate course", error);
+        }
+    };
+
+    const runRetakeCourse = async () => {
+        try {
+            await coursesApi.deleteEnrollment(course.enrollment.id);
+            await fetchCourse();
+        } catch (error) {
+            console.error("Failed to delete enrollment", error);
+        }
+    };
+
     if (loadingCourse) {
         return <div className="w-full py-20 text-center type-body-m text-greyscale-500">Loading course...</div>;
     }
@@ -424,31 +461,48 @@ const CoursePage = ({ user }) => {
 
 
                     {/* RIGHT PART */}
-                    <div className="flex flex-col gap-6 items-center">
-                        <Schedule
-                            user={user}
-                            onOpenLogin={openLogin}
-                            onOpenProfile={openProfile}
-                            onEnroll={() => runEnrollment({ force: false })}
-                            isEnrolled={isEnrolled}
-                            enrollment={course.enrollment}
-                            weeklySchedules={weeklySchedules}
-                            timeSlots={timeSlots}
-                            sessionTypes={sessionTypes}
-                            selectedWeeklyScheduleId={selectedWeeklyScheduleId}
-                            selectedTimeSlotId={selectedTimeSlotId}
-                            selectedSessionTypeId={selectedSessionTypeId}
-                            loadingWeeklySchedules={loadingWeeklySchedules}
-                            loadingTimeSlots={loadingTimeSlots}
-                            loadingSessionTypes={loadingSessionTypes}
-                            enrollLoading={enrollLoading}
-                            enrollError={enrollError}
-                            basePrice={toNumber(course.basePrice)}
-                            onSelectWeeklySchedule={(weeklyScheduleId) => setSelectedWeeklyScheduleId(weeklyScheduleId)}
-                            onSelectTimeSlot={(timeSlotId) => setSelectedTimeSlotId(timeSlotId)}
-                            onSelectSessionType={(sessionTypeId) => setSelectedSessionTypeId(sessionTypeId)}
-                        />
-                    </div>
+                    {course.enrollment ? (
+                        <div className="mr-10">
+                            <ProgressEnrolled 
+                                weeklySchedule={course.enrollment.schedule?.weeklySchedule?.label}
+                                timeSlot={course.enrollment.schedule?.timeSlot?.label}
+                                sessionType={course.enrollment.schedule?.sessionType?.name}
+                                location={course.enrollment.schedule?.location || "Tbilisi, Chavchavadze St.30"}
+                                progressPercent={course.enrollment.progress}
+                                onComplete={runCompleteCourse}
+                                onRetake={runRetakeCourse}
+                                isRated={course.isRated}
+                                userRating={course.isRated ? (course.reviews?.find(r => r.userId === user?.id)?.rating || 0) : 0}
+                                onRateCourse={runRateCourse}
+                            />
+                        </div>) : (
+                        <div className="flex flex-col gap-6 items-center">
+                            <Schedule
+                                user={user}
+                                onOpenLogin={openLogin}
+                                onOpenProfile={openProfile}
+                                onEnroll={() => runEnrollment({ force: false })}
+                                isEnrolled={isEnrolled}
+                                enrollment={course.enrollment}
+                                weeklySchedules={weeklySchedules}
+                                timeSlots={timeSlots}
+                                sessionTypes={sessionTypes}
+                                selectedWeeklyScheduleId={selectedWeeklyScheduleId}
+                                selectedTimeSlotId={selectedTimeSlotId}
+                                selectedSessionTypeId={selectedSessionTypeId}
+                                loadingWeeklySchedules={loadingWeeklySchedules}
+                                loadingTimeSlots={loadingTimeSlots}
+                                loadingSessionTypes={loadingSessionTypes}
+                                enrollLoading={enrollLoading}
+                                enrollError={enrollError}
+                                basePrice={toNumber(course.basePrice)}
+                                onSelectWeeklySchedule={(weeklyScheduleId) => setSelectedWeeklyScheduleId(weeklyScheduleId)}
+                                onSelectTimeSlot={(timeSlotId) => setSelectedTimeSlotId(timeSlotId)}
+                                onSelectSessionType={(sessionTypeId) => setSelectedSessionTypeId(sessionTypeId)}
+                            />
+                        </div>
+                    )}
+
                 </div>
             </div>
 
@@ -461,6 +515,9 @@ const CoursePage = ({ user }) => {
                 conflictSchedule={modalState.conflictSchedule}
                 onPrimaryAction={modalState.onPrimaryAction || closeEnrollmentModal}
                 onSecondaryAction={modalState.onSecondaryAction || closeEnrollmentModal}
+                isRated={course?.isRated}
+                initialRating={course?.isRated ? (course.reviews?.find(r => r.userId === user?.id)?.rating || 0) : 0}
+                onRate={runRateCourse}
             />
         </div>
     )
