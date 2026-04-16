@@ -103,7 +103,7 @@ const DragDropUpload = ({
                     className={`w-full h-35 
                     rounded-lg border-[1.5px] 
                     flex flex-col items-center justify-center 
-                    gap-2 p-4 transition-colors duration-200
+                    gap-2 p-4 transition-colors duration-300
                     hover:bg-purple-50 hover:border-purple-100
                     ${isOver ? 'border-purple-200 bg-purple-100' : 'border-greyscale-200 bg-greyscale-50'}
                     ${className}
@@ -141,7 +141,7 @@ const DragDropUpload = ({
                     className={`w-full h-35 
                     rounded-lg border-[1.5px] 
                     flex flex-row items-center 
-                    gap-2 pb-7.5 pt-7.5 transition-colors duration-200
+                    gap-2 pb-7.5 pt-7.5 transition-colors duration-300
                     bg-purple-50 border-purple-100
                     ${isOver ? 'border-purple-200 bg-purple-100' : 'border-greyscale-200 bg-greyscale-50'}`}
                 >

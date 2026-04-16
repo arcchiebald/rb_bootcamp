@@ -1,5 +1,5 @@
 const PaginationButton = ({ onClick, disabled, active, children }) => {
-    let styles = "flex items-center justify-center w-10 h-10 border rounded box-border type-buttons-s transition-colors duration-200 select-none";
+    let styles = "flex items-center justify-center w-10 h-10 border rounded box-border type-buttons-s transition-colors duration-300 select-none";
 
     if (active) {
         styles += " bg-purple-600 border-purple-500 text-greyscale-50";

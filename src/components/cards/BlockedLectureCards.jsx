@@ -12,7 +12,7 @@ const CustomButton = ({ children, onClick }) => {
       active:bg-purple-700
       focus:bg-purple-600 focus:border-2 focus:border-purple-700
       disabled:bg-greyscale-300 disabled:text-greyscale-400 disabled:cursor-not-allowed
-      transition-colors duration-200
+      transition-colors duration-300
     `} onClick={onClick}>
       {children}
     </button>

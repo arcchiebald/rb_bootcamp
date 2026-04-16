@@ -28,7 +28,7 @@ export const ProgressCard = ({
                         border-[0.5px] border-greyscale-100 rounded-xl 
                         hover:border-purple-200 hover:shadow-[0px_0px_25px_0px_8A82D440] 
                         active:border active:border-purple-300 active:shadow-[0px_0px_35px_0px_#8A82D440] 
-                        transition-all duration-200
+                        transition-all duration-300
                         ${blurred ? 'filter blur-sm' : ''}`}>
             <div className="flex flex-col items-start gap-4 w-full">
                 <div className="flex flex-row items-start gap-4.5 w-full">

@@ -80,7 +80,7 @@ const Homepage = ({ user }) => {
                         <div className='flex justify-between items-center w-full'>
                             <p className='type-body-m text-greyscale-700'>Track your current progress</p>
                             
-                            <button onClick={openSidebar} className='type-underlined-m text-purple-500 hover:text-purple-700 transition-colors duration-200 cursor-pointer'>See All</button>
+                            <button onClick={openSidebar} className='type-underlined-m text-purple-500 hover:text-purple-700 transition-colors duration-300 cursor-pointer'>See All</button>
                         </div>
                     </div>
                     
@@ -188,7 +188,7 @@ const Homepage = ({ user }) => {
                         <h1 className='type-heading-1 text-greyscale-950'>Continue Learning</h1>
                         <div className='flex justify-between items-center w-full'>
                             <p className='type-body-m text-greyscale-700'>Pick up where you left</p>
-                            <p  className='type-underlined-m text-purple-500 hover:text-purple-700 transition-colors duration-200 cursor-pointer'>See All</p>
+                            <p  className='type-underlined-m text-purple-500 hover:text-purple-700 transition-colors duration-300 cursor-pointer'>See All</p>
                         </div>
                     </div>
                     <BlockedLectureCards />

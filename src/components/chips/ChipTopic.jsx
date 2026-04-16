@@ -10,7 +10,7 @@ const ChipTopic = ({ name, active = false, onClick, disabled = false }) => {
                     hover:bg-purple-100 
                     active:border-purple-600 
                     disabled:bg-greyscale-100 disabled:cursor-not-allowed disabled:border-transparent
-                    transition-colors duration-200
+                    transition-colors duration-300
                     rounded-xl py-2 px-3 gap-2.5 
                     group`}
     >

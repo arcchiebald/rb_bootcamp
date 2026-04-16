@@ -81,7 +81,7 @@ const Input = ({
             rounded-lg
             border-[1.5px]
             outline-none
-            transition-colors duration-200
+            transition-colors duration-300
             type-body-xs text-greyscale-700
             placeholder:text-greyscale-400
             caret-greyscale-400

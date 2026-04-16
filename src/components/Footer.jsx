@@ -25,7 +25,7 @@ const Footer = () => {
                         </div>
 
                         {/* Social Icons */}
-                        <div className="flex gap-5.5 items-center text-purple-400 *:hover:text-purple-500 *:transition-colors *:duration-200">
+                        <div className="flex gap-5.5 items-center text-purple-400 *:hover:text-purple-500 *:transition-colors *:duration-300">
                             <a href="#" className="hover: transition-colors">
                                 <svg width="11" height="19" viewBox="0 0 11 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.31339 18.3945V10.1839H10.2081L10.6415 6.98403H7.31331V4.94106C7.31331 4.01463 7.58348 3.38332 8.97893 3.38332L10.7586 3.38252V0.520603C10.4508 0.481677 9.39429 0.394531 8.16531 0.394531C5.59929 0.394531 3.84255 1.88571 3.84255 4.62426V6.98403H0.94043V10.1839H3.84255V18.3945H7.31339V18.3945Z" fill="currentColor" />
@@ -56,7 +56,7 @@ const Footer = () => {
                     </div>
 
                     {/* Right Columns */}
-                    <div className="flex gap-30 **:transition-colors **:duration-200">
+                    <div className="flex gap-30 **:transition-colors **:duration-300">
                         {/* Explore Column */}
                         <div className="flex flex-col gap-4 w-36 ">
                             <h4 className="type-heading-4 text-purple-800 text-[20px]">Explore</h4>

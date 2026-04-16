@@ -33,7 +33,7 @@ export const ListingCard = ({
   blurred = false
 }) => {
   return (
-    <div className={`box-border flex flex-col items-start p-5 gap-6 w-93.25 min-h-112.75 bg-white border border-greyscale-100 rounded-xl hover:border-purple-200 hover:shadow-[0px_0px_15px_rgba(138,130,212,0.2)] active:border-purple-300 active:shadow-[0px_0px_15px_rgba(138,130,212,0.25)] transition-all duration-200 ${blurred ? "blur-[2px] opacity-70" : ""}`}>
+    <div className={`box-border flex flex-col items-start p-5 gap-6 w-93.25 min-h-112.75 bg-white border border-greyscale-100 rounded-xl hover:border-purple-200 hover:shadow-[0px_0px_15px_rgba(138,130,212,0.2)] active:border-purple-300 active:shadow-[0px_0px_15px_rgba(138,130,212,0.25)] transition-all duration-300 ${blurred ? "blur-[2px] opacity-70" : ""}`}>
       <div className="flex flex-col items-start gap-4.5 w-full">
         {/* სურათის ბლოკი */}
         <div className="w-83.25 h-45.25 rounded-[10px] overflow-hidden bg-gray-100">

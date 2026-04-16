@@ -22,7 +22,7 @@ const ChipInstructor = ({ photo = null, name = 'Marilyn Mango', active = false, 
       disabled={disabled}
       className={` 
                     w-max h-9.75 flex items-center rounded-xl py-2 px-3 gap-3 
-                    border box-border transition-colors duration-200 group
+                    border box-border transition-colors duration-300 group
                     ${disabled 
                       ? 'bg-greyscale-100 border-transparent cursor-not-allowed' 
                       : active 
@@ -31,7 +31,7 @@ const ChipInstructor = ({ photo = null, name = 'Marilyn Mango', active = false, 
                     }`}
     >
       <Icon photo={photo} name={name} />
-      <span className={`transition-colors duration-200 ${
+      <span className={`transition-colors duration-300 ${
         disabled 
           ? 'text-greyscale-600' 
           : active 

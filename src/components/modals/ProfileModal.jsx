@@ -180,7 +180,7 @@ const ProfileModal = ({ isOpen, onClose, user, setUser }) => {
                 <path d="M19 17.4167C22.4978 17.4167 25.3333 14.5811 25.3333 11.0833C25.3333 7.58553 22.4978 4.75 19 4.75C15.5022 4.75 12.6666 7.58553 12.6666 11.0833C12.6666 14.5811 15.5022 17.4167 19 17.4167Z" stroke="#736BEA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             )}
-            <div className={`absolute -bottom-0.5 -right-0.5 h-4.25 w-4.25 rounded-full border-2 border-greyscale-50 transition-colors duration-200 ${isComplete ? 'bg-helper-success' : 'bg-helper-warning'}`}></div>
+            <div className={`absolute -bottom-0.5 -right-0.5 h-4.25 w-4.25 rounded-full border-2 border-greyscale-50 transition-colors duration-300 ${isComplete ? 'bg-helper-success' : 'bg-helper-warning'}`}></div>
           </div>
           
           <div className="flex flex-col gap-1 w-full">

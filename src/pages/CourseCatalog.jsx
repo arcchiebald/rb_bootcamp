@@ -116,8 +116,8 @@ const CourseCatalog = () => {
                     <div className="flex justify-between">
                         <h1 className="type-heading-1 text-greyscale-950">Filters</h1>
                         <button onClick={clearAllFilters} className="flex flex-row gap-1.75 items-center cursor-pointer group">
-                            <span className="type-buttons-s text-greyscale-400 group-hover:text-purple-500 transition-colors duration-200">Clear All Filters</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" className='stroke-greyscale-400 group-hover:stroke-purple-500 transition-colors duration-200' xmlns="http://www.w3.org/2000/svg">
+                            <span className="type-buttons-s text-greyscale-400 group-hover:text-purple-500 transition-colors duration-300">Clear All Filters</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" className='stroke-greyscale-400 group-hover:stroke-purple-500 transition-colors duration-300' xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.75 5.75L0.75 0.75M5.75 5.75L10.75 10.75M5.75 5.75L10.75 0.75M5.75 5.75L0.75 10.75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
 
